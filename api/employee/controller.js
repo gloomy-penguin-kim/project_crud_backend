@@ -1,17 +1,27 @@
 const mongoose = require("mongoose")
 
 const Employee = require("../models/employee.js"); 
-const VW_Employee = require("../models/vw_employee.js")
+const VW_Employee = require("../models/vw_employee.js") 
 
 exports.create = (req, res) => {
     const { firstname, lastname, type, departments } = req.body; 
  
-    if (!firstname || firstname == "") res.status(422).end("firstname cannot be empty")
-    if (!lastname || lastname == "") res.status(422).end("lastname cannot be empty")
-    if (!type || type == "") res.status(422).end("employee type cannot be empty")
-    if (typeof departments != 'object') {
+    if (!firstname || firstname == "") {
+        res.status(422).end("firstname cannot be empty")
+        return 
+    }
+    if (!lastname || lastname == "") {
+        res.status(422).end("lastname cannot be empty")
+        return 
+    }
+    if (!type || type == "") {
+        res.status(422).end("employee type cannot be empty")
+        return 
+    }
+    if (departments && (departments.length > 0 || departments == [])) {
         res.status(422).end("department list needs to be an array")
-    } 
+        return 
+    }
 
     Employee.create({ firstname: firstname, lastname: lastname, type: type, departments: departments })
         .then(data => {
@@ -35,8 +45,9 @@ exports.listAll = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-    const id = req.params.id;
-    Employee.findById(id)
+    const id = req.params.id; 
+
+    VW_Employee.find({ employeeId: id })
         .then(data => {
             res.send(data);
         })
@@ -53,13 +64,13 @@ exports.update = (req, res) => {
     if (!firstname || firstname == "") res.status(422).end("firstname cannot be empty")
     if (!lastname || lastname == "") res.status(422).end("lastname cannot be empty")
     if (!type || type == "") res.status(422).end("employee type cannot be empty")
-    if (typeof departments != 'object') {
+    if (departments && typeof departments != 'object') {
         res.status(422).end("department list needs to be an array")
     }  
 
     const objid = new mongoose.Types.ObjectId(id) 
 
-    Employee.findOneAndUpdate(objid, { firstname: firstname, lastname: lastname, departments: departments })
+    Employee.findOneAndUpdate(objid, { firstname: firstname, lastname: lastname, type: type, departments: departments })
         .then(data => {
             res.status(201).json( data )
         })
@@ -71,9 +82,10 @@ exports.update = (req, res) => {
 } 
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id; 
+    const objid = new mongoose.Types.ObjectId(id) 
   
-    Employee.findByIdAndDelete(id)
+    Employee.findByIdAndDelete(objid)
         .then(data => {
             res.status(200).send(data);
         })
@@ -82,3 +94,4 @@ exports.delete = (req, res) => {
                 res.status(500).send("server error")
         });
 }
+

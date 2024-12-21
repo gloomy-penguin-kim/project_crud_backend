@@ -1,0 +1,7 @@
+node_modules
+.git
+.env
+
+frontend/src/
+frontend/public/
+frontend/node_modules/
