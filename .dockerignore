@@ -1,7 +1,14 @@
 node_modules
 .git
 .env
+.env.docker
 
-frontend/src/
-frontend/public/
+frontend/
 frontend/node_modules/
+frontend/build 
+
+mongodb/dump/
+./mongodb/dump/
+
+.vscode/
+ 

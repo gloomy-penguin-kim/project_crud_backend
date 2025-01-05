@@ -5,8 +5,9 @@ import Form from 'react-bootstrap/Form';
 const Checkboxes = ( props ) => { 
     const { selectedInit, totalOptions, onChangeCallback } = props 
     const [selected, setSelected] = useState(selectedInit)   
+ 
 
-    const handleChange = (event) => {
+    const handleChange = (event) => {  
         const { target } = event;  
         let tempSelected = selected 
 
@@ -40,14 +41,16 @@ const Checkboxes = ( props ) => {
     }, [selectedInit, selected]) 
  
     return (
-    <>
+    <> 
         <div id="checkboxesDiv" style={{marginLeft: '1.25rem'}}> 
             {totalOptions.map((option, index) => {
-                return (<> 
-                <Form.Check className="checkboxes" type="checkbox" name={option.name} value={option.value} 
+                return (<>  
+                
+                <Form.Check className="checkboxes" type="checkbox" 
+                        id={option.name.replaceAll(" ","")} name={option.name.replaceAll(" ","")} value={option.value}
                         defaultChecked={selected.includes(option.value)} 
                         onChange={handleChange}/>
-                {option.name}<br/>
+                <label for={option.name.replaceAll(" ","")}>{option.name}</label><br/>
                 </>
                 )
             })}  

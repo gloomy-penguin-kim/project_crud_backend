@@ -18,7 +18,9 @@ exports.create = (req, res) => {
         res.status(422).end("employee type cannot be empty")
         return 
     }
-    if (departments && (departments.length > 0 || departments == [])) {
+    if (departments && !Array.isArray(departments)) {
+        console.lof(departments)
+        console.log(typeof departments)
         res.status(422).end("department list needs to be an array")
         return 
     }

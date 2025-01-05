@@ -26,17 +26,19 @@ const EmployeeModal = ({ handleCloseCallback, show, setShow, employeeInit = {} }
     const [ employee, setEmployee ] = useState(employeeInit)  
   
     useEffect(() => { 
-        setEmployee(employeeInit) 
+        setEmployee(employeeInit)  
     }, [employeeInit])
  
     useEffect(() => {  
         axiosInstance.get('/api/department')
           .then(response => {   
-              let data= renameKeys({ departmentId: "value" }, response.data)
-              setDepartments(data) 
+              let data = renameKeys({ _id: "value" }, response.data)
+              setDepartments(data)  
+              console.log("departments just set", departments)
           })
           .catch(err => { 
-            console.log(err) 
+            //if (err.response?.data) alert(err.response.data)
+            //else console.log(err) 
           }) 
     }, []) 
  
@@ -64,8 +66,8 @@ const EmployeeModal = ({ handleCloseCallback, show, setShow, employeeInit = {} }
                 handleCloseCallback() 
             })
             .catch(err => { 
-                if (err.response.data) alert(err.response.data)
-                else console.log(err) 
+                //if (err.response?.data) alert(err.response.data)
+                //else console.log(err) 
             })
         }
         else { 
@@ -75,8 +77,8 @@ const EmployeeModal = ({ handleCloseCallback, show, setShow, employeeInit = {} }
                 handleCloseCallback() 
             })
             .catch(err => {
-                if (err.response.data) alert(err.response.data)
-                else console.log(err) 
+                //if (err.response?.data) alert(err.response.data)
+                //else console.log(err) 
             })
         } 
         setShow(false)
@@ -131,7 +133,9 @@ const EmployeeModal = ({ handleCloseCallback, show, setShow, employeeInit = {} }
                     <br/>
                     <div id="departmentsCheckboxes" >
                         Departments<br/> 
-                        <Checkboxes selectedInit={employee.departments || []} totalOptions={departments} onChangeCallback={handleChangeForDepartments}/>
+                        <Checkboxes selectedInit={employee.departments || []} 
+                                    totalOptions={departments} 
+                                    onChangeCallback={handleChangeForDepartments}/>
                     </div>
 
                 </Form.Group>

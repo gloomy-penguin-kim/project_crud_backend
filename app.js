@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const helmet = require('helmet')  
 const path = require('path')
 
+const config = require('./config.js');  
 const db = require('./db.js');  
  
 const employee_routes = require("./api/employee/routes.js")
@@ -14,9 +15,11 @@ const app = express ();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
-//app.use(helmet())
 
-PORT = process.env.PORT || 3000
+//require('dotenv').config()
+
+PORT = process.env.PORT || 3005
+
 var corsOptions = {
     origin: [ "http://localhost:3000", "http://192.168.1.147:3000" ]
 }
@@ -28,7 +31,7 @@ app.use("/api/department", department_routes);
 app.use("/api/views", view_routes);
  
 const testData = require('./data.js')
-testData.loadData() 
+ 
 
 app.use("/api/reset-data", (req, res) => { 
     testData.loadData()  
@@ -48,12 +51,15 @@ app.use(
     helmet.contentSecurityPolicy({
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "cdn.jsdelivr.net", "code.jquery.com"],
-        styleSrc: ["'self'", "cdn.jsdelivr.net"],
+        scriptSrc:  ["'self'", "cdn.jsdelivr.net", "code.jquery.com"],
+        styleSrc:   ["'self'", "cdn.jsdelivr.net"],
       },
     })
 )
 
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}.`);
+    setTimeout(() => {
+        testData.loadData() 
+    }, 1000)
 })

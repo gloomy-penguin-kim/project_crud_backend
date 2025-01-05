@@ -1,4 +1,4 @@
-# Use a Node.js base image
+# Use a Node.js base image 
 FROM node:18-alpine
 
 # Set the working directory in the container
@@ -11,10 +11,12 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application code
-COPY . .
+COPY . . 
+
 
 # Expose the port your application listens on
-EXPOSE 3000
+EXPOSE 3001
+ 
 
 # Start the application
 CMD ["node", "app.js"]

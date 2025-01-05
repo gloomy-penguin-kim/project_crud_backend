@@ -1,6 +1,7 @@
 import axiosInstance from '../utilities/axios'
 import { useEffect, useState } from 'react'
 import EmployeeModal from './EmployeeModal' 
+import LoadingModal from './LoadingModal'
 import { useParams } from 'react-router-dom'
  
 import 'bootstrap/dist/css/bootstrap.css'
@@ -23,21 +24,26 @@ const Employee = () => {
   const emptyEmployee = { firstname: "", lastname: "", type: "", departmentsId: [], empty: true}
   const [employee, setEmployee] = useState(emptyEmployee)
 
+
+ 
   const { urlParam } = useParams() 
 
-  const [ pageState, setPageState ] = useState(); 
+  const [ pageState, setPageState ] = useState(enumPageState.LOADING); 
+  const [ loading, setLoading ] = useState(true)
  
   
   const loadEmployees = () => { 
     axiosInstance.get('/api/employee')
       .then(response => { 
           setPageState(enumPageState.EMPLOYEES)
+          setLoading(false)
           setEmployees(response.data)
           console.log(employees) 
       })
       .catch(err => {
         if (err.response?.data) alert(err.response.data)
         setPageState(enumPageState.ERROR)
+        setLoading(false)
         console.log(err) 
       })
   } 
@@ -46,11 +52,13 @@ const Employee = () => {
     axiosInstance.get('/api/views/by-unassigned-employees')
       .then(response => {    
           setPageState(enumPageState.UNASSIGNED)
+          setLoading(false)
           setEmployees(response.data) 
       })
       .catch(err => {
         if (err.response?.data) alert(err.response.data)
         setPageState(enumPageState.ERROR)
+        setLoading(false)
         console.log(err) 
       }) 
   }   
@@ -61,15 +69,20 @@ const Employee = () => {
         if (response.data.length > 0) {  
           console.log("employee found!", response.data)
           setPageState(enumPageState.EMPLOYEE)
+          setLoading(false)
           setEmployee(response.data[0])
           setEmployees(response.data)
           setShowEditModal(true)
         }
-        else setPageState(enumPageState.NOT_FOUND)
+        else {
+          setPageState(enumPageState.NOT_FOUND) 
+          setLoading(false)
+        } 
         console.log(employee) 
       })
       .catch(err => {
         setPageState(enumPageState.ERROR)
+        setLoading(false)
         setPageState("Server Error")
         setShowEditModal(false)
         console.log(err) 
@@ -98,7 +111,7 @@ const Employee = () => {
   const deleteEmployee = (employeeInfo) => {
     console.log("delete employee", employeeInfo)
     if (window.confirm("Are you sure?")) { 
-      axiosInstance.delete('employee/'+employeeInfo.employeeId)
+      axiosInstance.delete('/api/employee/'+employeeInfo.employeeId)
         .then(response => {   
             loadEmployees() 
         })
@@ -168,6 +181,9 @@ const Employee = () => {
       setShow={setShowEditModal}
       handleCloseCallback={employeeModalCallback} 
       employeeInit={employee}  />
+
+    <LoadingModal loading={loading}/>
+
 
     </>
   );

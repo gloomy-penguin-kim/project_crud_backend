@@ -11,7 +11,7 @@ const VW_By_Department_Schema = new mongoose.Schema({
     departmentId: mongoose.Schema.Types.ObjectId,
     departmentsName: { type: String } 
 
-}, { collection: 'employees', versionKey: false })
+})
 
 const VW_By_Department = mongoose.model('VW_By_Department', VW_By_Department_Schema, 'vw_by_department');
 

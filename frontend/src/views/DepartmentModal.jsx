@@ -10,26 +10,27 @@ import Form from 'react-bootstrap/Form';
 const DepartmentModal = ({ handleCloseCallback, show, setShow, departmentInit  }) => {  
     const [ department, setDepartment ] = useState(departmentInit)  
   
-    console.log("departmentInit", departmentInit)
- 
-    console.log("department", department) 
+    //console.log("departmentInit", departmentInit)
 
-    useEffect(() => { 
+    useEffect(() => {  
+        console.log("set department called again")
         setDepartment(departmentInit) 
     }, [departmentInit]) 
  
     const handleChange = (event) => {
         const { target } = event;
+        console.log("HandleChange", target.name)
+        console.log("HandleChange", target.value)
         setDepartment((prevState) => ({
           ...prevState,
           [target.name]: target.value,
-        }));
-        console.log("handleChange in department Modal", department)
+        })); 
+        console.log(department)
       };
  
     const handleClose = () => { 
-        if (department.departmentId) { 
-            axiosInstance.put('department/' + department.departmentId, department)
+        if (department._id) { 
+            axiosInstance.put('/api/department/' + department._id, department)
             .then(response => { 
                 handleCloseCallback() 
             })
@@ -38,9 +39,8 @@ const DepartmentModal = ({ handleCloseCallback, show, setShow, departmentInit  }
                 else console.log(err) 
             })
         }
-        else { 
-            console.log("new department", department)
-            axiosInstance.post('department', department)
+        else {  
+            axiosInstance.post('/api/department', department)
             .then(response => {  
                 handleCloseCallback() 
             })
@@ -62,7 +62,7 @@ const DepartmentModal = ({ handleCloseCallback, show, setShow, departmentInit  }
         <Modal.Body>
             <form>
                 <Form.Group> 
-                    <Form.Control type="text" name="departmentId" hidden></Form.Control>
+                    <Form.Control type="text" name="_id" hidden></Form.Control>
 
                     <Form.Label htmlFor="name">Name</Form.Label>
                     <Form.Control 

@@ -1,6 +1,7 @@
-
+const mongoose = require('mongoose')
 const Department = require("../models/department.js")
-const Employee = require('../models/employee.js')
+const Employee = require('../models/employee.js');
+const VW_By_Department = require('../models/vw_by_department.js'); 
 
 exports.create = async (req, res) =>  {
     const { name } = req.body;
@@ -29,9 +30,15 @@ exports.create = async (req, res) =>  {
 exports.findById = (req, res) => {
     const id = req.params.id;   
 
-    Department.findById(id)
+    const objId = new mongoose.Types.ObjectId(id) 
+
+    Department.aggregate() 
+        .match({ departmentId: objId })
+        .lookup({ from: "vw_by_department", localField: "_id", foreignField: "departmentId", as: "employees" })
+        .addFields({ departmentId: "$departmentId", departmentName: "$departmentName", employees: { $size: "$employees" } })
+        .exec() 
         .then(data => {
-            res.status(201).json( data )
+            res.status(201).json(data)
         })
         .catch(err => {
             console.log(err) 
@@ -45,6 +52,8 @@ exports.update = (req, res) => {
     if (!req.body) { 
         res.status(422).send("input missing or incorrect")
     } 
+    console.log("here ---------------------")
+ 
 
     Department.findByIdAndUpdate(id, req.body)
         .then(data => {
@@ -66,8 +75,7 @@ exports.delete = async (req, res) => {
                 console.log(employee) 
                 const indexOf = employee.departments.indexOf(id)
                 employee.departments.splice(indexOf, 1);
-    
-                console.log("before findByIdAndUpdate", employee)
+     
                 Employee.findByIdAndUpdate(employee._id, employee)
                     .then(response => {
                         console.log("Employee.findByIdAndUpdate", response) 
@@ -87,12 +95,12 @@ exports.delete = async (req, res) => {
 
 
 exports.listAll = (req, res) => {
-    Department.aggregate()
-        .addFields({ departmentId: "$_id", _id: "$tacos" })
-        .sort({name: 1})
+    Department.aggregate()  
+        .lookup({ from: "vw_by_department", localField: "_id", foreignField: "departmentId", as: "employees" })
+        .addFields({ employees: { $size: "$employees" }, lower: { $toLower: "$name"} }) 
+        .sort({ lower: 1 })
         .exec() 
-        .then(data => {
-            console.log("department.listAll", data)
+        .then(data => { 
             res.status(200).json(data)
         })
         .catch(err => {

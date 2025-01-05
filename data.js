@@ -1,14 +1,16 @@
 const Department = require('./api/models/department.js')
 const Employee = require('./api/models/employee.js')
+const VW_Employee_FOJ_Department = require('./api/models/vw_employee_foj_department.js')
 const deleteDepartment = require('./api/department/controller.js').delete
 
+const db = require('./db.js')
 
 exports.loadData = () => {
     
-Department.deleteMany({})
+Department.deleteMany()
     .then(() => { 
  
-Employee.deleteMany({})
+Employee.deleteMany()
         .then(() => {
         Employee.create({firstname: "Travis", lastname: "Combs", type:"Clerical", departments: []})
      
@@ -53,8 +55,12 @@ Employee.deleteMany({})
 
                     }) 
                 Employee.create({firstname: "Leslie", lastname: "Roche", type:"Housekeeping", departments: [orthodontics]})
+
+
+                VW_Employee_FOJ_Department.find().then(data => console.log("VW_Employee_FOJ_Department.find()", data.length))
+
             })
-        } ,2000)
+        } ,1000)
     })
     }) 
 

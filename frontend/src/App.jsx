@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 
 import Home from './views/Home'
+import Contact from './views/Contact'
 import Employee from './views/Employee'
 import Department from './views/Department';
 import VWByDepartment from './views/VWByDepartment';
@@ -18,11 +19,12 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar>      
-          <Navbar.Brand href="#home">Apollonia Dental Practice</Navbar.Brand>
+          <Navbar.Brand href="/">Apollonia Dental Practice</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="">
               <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/contact">Contact</Nav.Link>
               <Nav.Link href="/department">Departments</Nav.Link>
               <Nav.Link href="/employee">Employees</Nav.Link>  
               <Nav.Link href="/employee/unassigned">Unassigned Employees</Nav.Link>  
@@ -34,6 +36,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/employee" element={<Employee />} />
         <Route path="/employee/:urlParam" element={<Employee />} />
         <Route path="/department" element={<Department />} />

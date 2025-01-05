@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
  
 
@@ -7,15 +6,13 @@ const VW_DepartmentSchema = new mongoose.Schema({
     lastname:  { type: String, required: true },
     type:      { type: String, enum: ['Admin', 'Medical', 'Clerical', 'Housekeeping'] 
     },
-    
     employeeId: mongoose.Schema.Types.ObjectId,
 
-    departmentsName: { type: String },
     departmentId: mongoose.Schema.Types.ObjectId,
+    departmentsName: { type: String }
+})
 
-}, { collection: 'employees', versionKey: false })
-
-const VW_Department = mongoose.model('VW_Department', VW_DepartmentSchema, 'vw_by_department');
+const VW_Department = mongoose.model('VW_Department', VW_DepartmentSchema, 'vw_department');
  
 
 module.exports = VW_Department 
