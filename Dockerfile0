@@ -1,0 +1,19 @@
+# Use a Node.js base image 
+FROM mongo:latest
+
+# Set the working directory in the container
+WORKDIR /
+
+# Copy package.json and package-lock.json 
+#COPY /data/mongodb/project_crud/data /data/db 
+COPY ./mongodb/scripts/mongo-init.sh /docker-entrypoint-initdb.d/mongo-init.sh
+ADD  ./mongodb/dump /data/dump 
+ 
+RUN ls /data/dump 
+
+# Start the application
+CMD ["mongod"]
+
+# docker build -t mongodbimage -f Dockerfile0 .
+# 
+# docker run --env-file .env  --hostname mongo -p 27017:27017 mongodbimage

@@ -16,7 +16,12 @@ COPY . .
 
 # Expose the port your application listens on
 EXPOSE 3001
- 
+
 
 # Start the application
 CMD ["node", "app.js"]
+
+
+# docker build -t webapp -f Dockerfile1 .
+# 
+# docker run --env-file .env -p 3001:3001 webapp

@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //require('dotenv').config()
 
-PORT = process.env.PORT || 3005
+PORT = process.env.PORT || 3001
 
 var corsOptions = {
     origin: [ "http://localhost:3000", "http://192.168.1.147:3000" ]

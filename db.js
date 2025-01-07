@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
-
 require('dotenv').config();
 
-let uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?directConnection=true&authSource=admin`; 
-const clientOptions = { dbName: process.env.DB_NAME };   
+let uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}`;  
+const clientOptions = { dbName: process.env.DB_NAME };    
+
+console.log(uri) 
 
 mongoose.set('debug', true); 
 const db = mongoose.connect(uri, clientOptions)
