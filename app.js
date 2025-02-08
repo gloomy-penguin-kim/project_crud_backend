@@ -11,12 +11,10 @@ const employee_routes = require("./api/employee/routes.js")
 const department_routes = require("./api/department/routes.js")
 const view_routes = require('./api/views/routes.js')
 
-const app = express ();
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
-
-//require('dotenv').config()
+const app = express ()
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 PORT = process.env.PORT || 3001
 

@@ -38,8 +38,7 @@ Employee.deleteMany()
                 const orthodontics = data._id   
 
                 Department.find({ name: "Restorative Dentistry" })
-                    .then(data => {
-                        console.log("-------------------------", data)
+                    .then(data => { 
                         const restorative_dentistry = data[0]._id
                         Employee.create({firstname: "Lisa", lastname: "Harris", type:"Medical", departments: [restorative_dentistry, orthodontics]})
 
@@ -57,7 +56,7 @@ Employee.deleteMany()
                 Employee.create({firstname: "Leslie", lastname: "Roche", type:"Housekeeping", departments: [orthodontics]})
 
 
-                VW_Employee_FOJ_Department.find().then(data => console.log("VW_Employee_FOJ_Department.find()", data.length))
+                //VW_Employee_FOJ_Department.find().then(data => console.log("VW_Employee_FOJ_Department.find()", data.length))
 
             })
         } ,1000)

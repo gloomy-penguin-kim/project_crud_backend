@@ -24,12 +24,12 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/contact">Contact</Nav.Link>
               <Nav.Link href="/department">Departments</Nav.Link>
               <Nav.Link href="/employee">Employees</Nav.Link>  
               <Nav.Link href="/employee/unassigned">Unassigned Employees</Nav.Link>  
               <Nav.Link href="/by-department">View By Department</Nav.Link>
               <Nav.Link href="/by-employee-type">View By Employee Type</Nav.Link>
+              <Nav.Link href="/contact">Contact Me</Nav.Link>
             </Nav>
           </Navbar.Collapse>  
       </Navbar>

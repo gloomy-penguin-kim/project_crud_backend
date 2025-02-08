@@ -4,7 +4,8 @@ node_modules
 .env.docker
  
 frontend/node_modules/ 
- 
+frontend/src/
+
 
 .vscode/
  
