@@ -31,13 +31,13 @@ exports.send_email = (req, res) => {
     const sentFrom = new Sender( process.env.EMAIL_API_SENDER, 
                                  process.env.EMAIL_API_SENDER_NAME)
    
-    const recipients = [
-        new Recipient(process.env.EMAIL_TO_ADDRESS, "")
-    ]
+    const recipientsGP = [ 
+        new Recipient(process.env.EMAIL_TO_ADDRESS, "Kim Jones"),
+    ] 
    
     const emailParams = new EmailParams()
         .setFrom(sentFrom)
-        .setTo(recipients)
+        .setTo(recipientsGP) 
         .setSubject(process.env.EMAIL_SUBJECT)
         .setHtml("<b>Message:</b><br/>"+ message + "<br/><br/><b>Sender:</b><br/>" + sender)
         //.setText("This is the text content")

@@ -38,25 +38,30 @@ const Home = () => {
 }
       `;
 
-      return (
-        <div className="contaiiner">
-        <h2>Welcome to the Employee Department Website!</h2> 
-        <br/>
+      return (<>
+        <p><h2>Welcome to the Employee Department Website!</h2></p>
+        <div className="card" style={{width:"70rem", padding: "20px", border: "0px"}}>
+        
         <p>
           Please click <button onClick={reloadData}>here</button> to reload the test data (for everyone). 
         </p>
+ 
         <p>
-          Employees have one employee type (clerical, medical, housekeeping, etc) and can belong to zero or many departments. I use MongoDB, NodeJS, Express, and React in this project. 
-        </p>
+          Employees have one employee type (clerical, medical, housekeeping, etc) and can belong to zero or many departments. I use MongoDB, NodeJS, Express, and React in this project.  Also, it uses Docker and is hosted on Heroku.   
+        </p> 
+
+
         <p>
-          <a href="https://www.coursera.org/projects/showcase-build-a-crud-nodejs-and-mongodb-employee-management-web-app">Project Outline on Coursera</a>.  
+          <a href="https://www.coursera.org/projects/showcase-build-a-crud-nodejs-and-mongodb-employee-management-web-app">Backend project outline on Coursera</a>  
         </p>
+        <p><a href="https://github.com/gloomy-penguin-kim/project_crud_backend.git">Source on Github</a></p>
         <p>
           <pre>
 {preformatted}
           </pre>
         </p>
         </div>
+        </>
       )
 
 }

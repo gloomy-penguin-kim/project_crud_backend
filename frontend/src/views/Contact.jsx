@@ -1,6 +1,6 @@
 import React from 'react'
 import axiosInstance from '../utilities/axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button';
@@ -14,9 +14,9 @@ const validateEmail = (email) => {
 
 
 const Contact = () => {  
-    const [ sender, setSender ] = useState("")
-    const [ senderError, setSenderError ] = useState("")
-    const [ message, setMessage ] = useState("")
+    const [ sender, setSender ]             = useState("")
+    const [ senderError, setSenderError ]   = useState("")
+    const [ message, setMessage ]           = useState("")
     const [ messageError, setMessageError ] = useState("")
     
     const navigate = useNavigate() 
