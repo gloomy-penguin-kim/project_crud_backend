@@ -3,9 +3,7 @@ node_modules/
 .env.docker
 
 frontend/node_modules/
-frontend/build/
 
 ./.env
 
 mongodb/dump
-frontend/build

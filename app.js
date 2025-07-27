@@ -16,7 +16,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-PORT = process.env.PORT || 3001
+PORT = process.env.PORT || 3005
 
 var corsOptions = {
     origin: [ "http://localhost:3000", "http://192.168.1.147:3000" ]
