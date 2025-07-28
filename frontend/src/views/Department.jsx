@@ -85,8 +85,9 @@ const Department = () => {
   }
 
   const deleteDepartment = (departmentInfo) => { 
+    console.log(departmentInfo) 
     if (window.confirm("Are you sure?")) { 
-      axiosInstance.delete('/api/department/'+departmentInfo.departmentId)
+      axiosInstance.delete('/api/department/'+departmentInfo._id)
         .then(response => {   
             loadDepartments() 
         })

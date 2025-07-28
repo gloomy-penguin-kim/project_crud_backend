@@ -15,7 +15,7 @@ COPY . .
 
 
 # Expose the port your application listens on
-EXPOSE 3001
+EXPOSE 3005
 
 
 # Start the application

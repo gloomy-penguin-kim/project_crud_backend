@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 require('dotenv').config();
 //const config = require('./config.js');  
 
-let uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}`;  
+let uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`;  
 const clientOptions = { dbName: process.env.DB_NAME };    
 
 console.log(uri); 

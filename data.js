@@ -7,6 +7,9 @@ const db = require('./db.js')
 
 exports.loadData = () => {
     
+
+    setTimeout(() => {
+
 Department.deleteMany()
     .then(() => { 
  
@@ -62,6 +65,7 @@ Employee.deleteMany()
         } ,1000)
     })
     }) 
+        } ,2*1000)
 
 }
 
