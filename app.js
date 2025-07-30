@@ -28,14 +28,6 @@ app.use("/api/employee", employee_routes);
 app.use("/api/department", department_routes);
 app.use("/api/views", view_routes);
  
-const testData = require('./data.js')
- 
-
-app.use("/api/reset-data", (req, res) => { 
-    testData.loadData()  
-    res.status(200).send("data was reset")
-})
-
 
 // Serve static files from the React app's build directory
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
@@ -55,9 +47,16 @@ app.use(
     })
 )
 
+const testData = require('./data.js')
+app.use("/api/reset-data", (req, res) => { 
+    testData.loadData()  
+    res.status(200).send("data was reset")
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}.`);
     setTimeout(() => {
         testData.loadData() 
-    }, 1000)
+    }, 5000)
 })

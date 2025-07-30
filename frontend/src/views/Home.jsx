@@ -54,7 +54,7 @@ const Home = () => {
         <p>
           <a href="https://www.coursera.org/projects/showcase-build-a-crud-nodejs-and-mongodb-employee-management-web-app">Backend project outline on Coursera</a>  
         </p>
-        <p><a href="https://github.com/gloomy-penguin-kim/project_crud_backend.git">Source on Github</a></p>
+        <p><a href="https://github.com/gloomy-penguin-kim/project_crud_backend">Source on Github</a></p>
         <p>
           <pre>
 {preformatted}
