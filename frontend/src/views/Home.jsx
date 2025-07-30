@@ -1,6 +1,8 @@
 import React from 'react'
 import axiosInstance from '../utilities/axios'
 
+
+
 const Home = () => {  
 
       const reloadData = () => {
@@ -54,7 +56,8 @@ const Home = () => {
         <p>
           <a href="https://www.coursera.org/projects/showcase-build-a-crud-nodejs-and-mongodb-employee-management-web-app">Backend project outline on Coursera</a>  
         </p>
-        <p><a href="https://github.com/gloomy-penguin-kim/project_crud_backend">Source on Github</a></p>
+        <p>
+        <a href="https://github.com/gloomy-penguin-kim/project_crud_backend" target="_blank" rel="noopener noreferrer" title="https://github.com/gloomy-penguin-kim/project_crud_backend">https://github.com/gloomy-penguin-kim/project_crud_backend</a></p>
         <p>
           <pre>
 {preformatted}

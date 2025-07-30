@@ -2,8 +2,14 @@ node_modules/
 .env
 .env.docker
 
+.vscode 
+
+
 frontend/node_modules/
 
 ./.env
 .docker_key.pub
 mongodb/dump
+
+heroku_id_ed25529.pub
+heroku_id_ed25529
